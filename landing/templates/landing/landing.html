@@ -1,0 +1,231 @@
+{%load static%}
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlético Nacional - Tienda Oficial</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">Atlético Nacional</span>
+            </div>
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#productos">Productos</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="hero" id="inicio">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>¡Puro Verde, Puro Corazón!</h1>
+            <p>Descubre la colección oficial del Atlético Nacional, el equipo de la Animalada</p>
+            <a href="#productos" class="btn-hero">Ver productos</a>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="products-section" id="productos">
+    <div class="container">
+        <h2 class="section-title">Productos Oficiales</h2>
+        <div class="products-grid">
+            {% for producto in productos %}
+            <div class="product-card">
+                <div class="product-image">
+                    {% if producto.foto_url %}
+                    <img src="{{ producto.foto_url }}" alt="{{ producto.nombre }}">
+                    {% else %}
+                    <img src="https://via.placeholder.com/300x300?text=Atlético+Nacional" alt="{{ producto.nombre }}">
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h3>{{ producto.nombre }}</h3>
+                    <div class="price-container">
+                        <span class="price">${{ producto.precio }}</span>
+                        {% if producto.stock > 0 %}
+                        <span class="stock">Disponible: {{ producto.stock }}</span>
+                        {% else %}
+                        <span class="stock agotado">Agotado</span>
+                        {% endif %}
+                    </div>
+                    {% if producto.stock > 0 %}
+                    <button class="btn-primary">Agregar al carrito</button>
+                    {% else %}
+                    <button class="btn-primary" disabled>Agotado</button>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="no-products">No hay productos disponibles en este momento.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+    
+    <!-- About Section -->
+    <section class="about-section" id="nosotros">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>El equipo del pueblo</h2>
+                    <p>Atlético Nacional es más que un club de fútbol. Somos una institución que representa la pasión antioqueña y colombiana, con una hinchada fiel conocida como "La Animalada".</p>
+                    <p>Desde 1947, hemos sido protagonistas del fútbol colombiano e internacional, con una filosofía que combina excelencia deportiva con identidad regional.</p>
+                    <ul class="benefits-list">
+                        <li>
+                            <span class="check-icon">✓</span>
+                            Productos oficiales del Verde
+                        </li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            Envío gratis en Medellín
+                        </li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            Garantía de autenticidad
+                        </li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            Devoluciones gratuitas
+                        </li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="{% static 'img/fotoblancoynegro.jpg' %}" alt="Atlético Nacional">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacto">
+        <div class="container">
+            <h2 class="contact-title">Contáctanos</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <strong>Dirección</strong>
+                            <p>Estadio Atanasio Girardot, Medellín<br>Antioquia, Colombia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <strong>Teléfono</strong>
+                            <p>+57 604 555 1234</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉</span>
+                        <div>
+                            <strong>Email</strong>
+                            <p>tienda@atlnacional.com.co</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🕒</span>
+                        <div>
+                            <strong>Horario de atención</strong>
+                            <p>Lunes a Viernes: 8:00 - 17:00<br>Sábados: 9:00 - 13:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-section">
+                        <h4>Síguenos en redes sociales</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon facebook">Facebook</a>
+                            <a href="#" class="social-icon instagram">Instagram</a>
+                            <a href="#" class="social-icon twitter">Twitter</a>
+                            <a href="#" class="social-icon youtube">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Envíanos un mensaje</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Correo electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Asunto" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Mensaje" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Atlético Nacional</h3>
+                    <p>El equipo del pueblo</p>
+                    <p>Fundado en 1947, representamos la pasión antioqueña y la grandeza del fútbol colombiano.</p>
+                    <div class="footer-social">
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">YouTube</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <div class="contact-info-footer">
+                        <p><strong>Dirección:</strong><br>Estadio Atanasio Girardot, Medellín</p>
+                        <p><strong>Teléfono:</strong><br>+57 604 555 1234</p>
+                        <p><strong>Email:</strong><br>tienda@atlnacional.com.co</p>
+                        <p><strong>Horario:</strong><br>Lun-Vie: 8:00-17:00<br>Sáb: 9:00-13:00</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="footer-bottom">
+                <p>&copy; 2025 Atlético Nacional. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
